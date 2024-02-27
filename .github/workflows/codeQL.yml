@@ -1,4 +1,8 @@
 name: "Code Scanning - Action"
+strategy:
+fail-fast: false
+  matrix:
+    language: ['javascript', 'python']
 
 on:
   pull_request:
@@ -7,6 +11,7 @@ on:
 jobs:
   CodeQL-Build:
     runs-on: ubuntu-latest
+       
 
     permissions:
       # required for all workflows
@@ -22,8 +27,4 @@ jobs:
         uses: github/codeql-action/init@v1
 
       - name: Perform CodeQL Analysis
-         strategy:
-          fail-fast: false
-          matrix:
-            language: ['javascript', 'python']
         uses: github/codeql-action/analyze@v1
